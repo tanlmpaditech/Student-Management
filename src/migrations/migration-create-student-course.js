@@ -6,6 +6,12 @@ module.exports = {
     // courseId: DataTypes.STRING,
     // studentId: DataTypes.STRING,
     // score: DataTypes.INTEGER
+        // id: {
+        //     allowNull: false,
+        //     primaryKey: true,
+        //     autoIncrement: true,
+        //     type: Sequelize.INTEGER
+        // },
         courseId: {
             allowNull: false,
             primaryKey: true,
