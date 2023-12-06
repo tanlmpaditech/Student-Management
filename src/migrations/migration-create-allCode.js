@@ -6,12 +6,12 @@ module.exports = {
     // key: DataTypes.STRING,
     // type: DataTypes.STRING,
     // value: DataTypes.STRING,
-        // id: {
-        //     allowNull: false,
-        //     autoIncrement: true,
-        //     primaryKey: true,
-        //     type: Sequelize.INTEGER
-        // },
+        id: {
+            allowNull: false,
+            autoIncrement: true,
+            primaryKey: true,
+            type: Sequelize.INTEGER
+        },
         key: {
             type: Sequelize.STRING
         },
