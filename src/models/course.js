@@ -18,9 +18,12 @@ module.exports = (sequelize, DataTypes) => {
     time: DataTypes.TIME,
     teacherId: DataTypes.STRING,
     numberOfStudent: DataTypes.INTEGER,
+    createAt: DataTypes.TIME,
+    updateAt: DataTypes.TIME,
   }, {
     sequelize,
     modelName: 'Course',
+    timestamps: true,
   });
   return Course;
 };

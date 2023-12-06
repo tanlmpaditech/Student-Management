@@ -19,10 +19,13 @@ module.exports = (sequelize, DataTypes) => {
     fullName: DataTypes.STRING,
     phoneNumber: DataTypes.STRING,
     gender: DataTypes.BOOLEAN,
+    createAt: DataTypes.TIME,
+    updateAt: DataTypes.TIME,
     // roleId: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Student',
+    timestamps: true,
   });
   return Student;
 };

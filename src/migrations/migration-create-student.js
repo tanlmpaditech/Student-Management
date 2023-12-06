@@ -3,15 +3,14 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('students', {
-        // id: {
-        //     allowNull: false,
-        //     primaryKey: true,
-        //     autoIncrement: true,
-        //     type: Sequelize.INTEGER
-        // },
-        studentId: {
+        id: {
             allowNull: false,
             primaryKey: true,
+            autoIncrement: true,
+            type: Sequelize.INTEGER
+        },
+        studentId: {
+            allowNull: false,
             type: Sequelize.STRING,
         },
         email: {
@@ -26,9 +25,14 @@ module.exports = {
         gender: {
             type: Sequelize.BOOLEAN,
         },
-        // roleId: {
-        //     type: Sequelize.STRING,
-        // }
+        createdAt: {
+            allowNull: false,
+            type: Sequelize.DATE
+        },
+        updatedAt: {
+            allowNull: false,
+            type: Sequelize.DATE
+        }
     });
   },
   async down(queryInterface, Sequelize) {

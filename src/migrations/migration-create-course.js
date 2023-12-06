@@ -7,15 +7,14 @@ module.exports = {
     // time: DataTypes.TIME,
     // teacherId: DataTypes.STRING,
     // numberOfStudent: DataTypes.INTEGER,
-        // id: {
-        //     allowNull: false,
-        //     primaryKey: true,
-        //     autoIncrement: true,
-        //     type: Sequelize.INTEGER
-        // },
-        courseId: {
+        id: {
             allowNull: false,
             primaryKey: true,
+            autoIncrement: true,
+            type: Sequelize.INTEGER
+        },
+        courseId: {
+            allowNull: false,
             type: Sequelize.STRING,
         },
         time: {
@@ -27,14 +26,14 @@ module.exports = {
         numberOfStudent: {
             type: Sequelize.INTEGER
         },
-        // createdAt: {
-        //     allowNull: false,
-        //     type: Sequelize.DATE
-        // },
-        // updatedAt: {
-        //     allowNull: false,
-        //     type: Sequelize.DATE
-        // }
+        createdAt: {
+            allowNull: false,
+            type: Sequelize.DATE
+        },
+        updatedAt: {
+            allowNull: false,
+            type: Sequelize.DATE
+        }
     });
   },
   async down(queryInterface, Sequelize) {

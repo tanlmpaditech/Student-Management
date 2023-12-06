@@ -9,8 +9,14 @@ let getHomePage = async (req, res) => {
     } catch(err) {
         console.log(err);
     }
-    
-
 }
 
-export default getHomePage;
+// let getCRUD = async (req, res) => {
+//     try{
+//         return res.send('CRUD');
+//     } catch(err) {
+//         console.log(err);
+//     }
+// }
+
+export default {getHomePage};

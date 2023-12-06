@@ -8,13 +8,12 @@ module.exports = {
     // fullName: DataTypes.STRING,
     // phoneNumber: DataTypes.STRING,
     // gender: DataTypes.BOOLEAN,
-    // roleId: DataTypes.STRING,
-        // id: {
-        //     allowNull: false,
-        //     primaryKey: false,
-        //     autoIncrement: true,
-        //     type: Sequelize.INTEGER
-        // },
+        id: {
+            allowNull: false,
+            primaryKey: false,
+            autoIncrement: true,
+            type: Sequelize.INTEGER
+        },
         teacherId: {
             allowNull: false,
             primaryKey: true,
@@ -32,9 +31,14 @@ module.exports = {
         gender: {
             type: Sequelize.BOOLEAN,
         },
-        // roleId: {
-        //     type: Sequelize.STRING,
-        // }
+        createdAt: {
+            allowNull: false,
+            type: Sequelize.DATE
+        },
+        updatedAt: {
+            allowNull: false,
+            type: Sequelize.DATE
+        }
     });
   },
   async down(queryInterface, Sequelize) {

@@ -6,24 +6,30 @@ module.exports = {
     // courseId: DataTypes.STRING,
     // studentId: DataTypes.STRING,
     // score: DataTypes.INTEGER
-        // id: {
-        //     allowNull: false,
-        //     primaryKey: true,
-        //     autoIncrement: true,
-        //     type: Sequelize.INTEGER
-        // },
-        courseId: {
+        id: {
             allowNull: false,
             primaryKey: true,
+            autoIncrement: true,
+            type: Sequelize.INTEGER
+        },
+        courseId: {
+            allowNull: false,
             type: Sequelize.STRING,
         },
         studentId: {
             allowNull: false,
-            primaryKey: true,
             type: Sequelize.STRING,
         },
         score: {
             type: Sequelize.INTEGER
+        },
+        createdAt: {
+            allowNull: false,
+            type: Sequelize.DATE
+        },
+        updatedAt: {
+            allowNull: false,
+            type: Sequelize.DATE
         }
     });
   },
