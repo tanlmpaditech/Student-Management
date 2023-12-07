@@ -10,13 +10,12 @@ module.exports = {
     // gender: DataTypes.BOOLEAN,
         id: {
             allowNull: false,
-            primaryKey: false,
+            primaryKey: true,
             autoIncrement: true,
             type: Sequelize.INTEGER
         },
         teacherId: {
             allowNull: false,
-            primaryKey: true,
             type: Sequelize.STRING,
         },
         email: {
@@ -29,16 +28,16 @@ module.exports = {
             type: Sequelize.STRING,
         },
         gender: {
-            type: Sequelize.BOOLEAN,
+            type: Sequelize.STRING,
         },
         createdAt: {
-            allowNull: false,
-            type: Sequelize.DATE
+          allowNull: false,
+          type: Sequelize.DATE
         },
         updatedAt: {
-            allowNull: false,
-            type: Sequelize.DATE
-        }
+          allowNull: false,
+          type: Sequelize.DATE
+        },
     });
   },
   async down(queryInterface, Sequelize) {

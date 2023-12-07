@@ -11,28 +11,32 @@ module.exports = {
         },
         studentId: {
             allowNull: false,
+            primaryKey: true,
+            type: Sequelize.INTEGER,
+        },
+        fullName: {
             type: Sequelize.STRING,
         },
         email: {
             type: Sequelize.STRING,
         },
-        fullName: {
+        address: {
             type: Sequelize.STRING,
         },
         phoneNumber: {
             type: Sequelize.STRING,
         },
         gender: {
-            type: Sequelize.BOOLEAN,
+            type: Sequelize.STRING,
         },
         createdAt: {
-            allowNull: false,
-            type: Sequelize.DATE
+          allowNull: false,
+          type: Sequelize.DATE
         },
         updatedAt: {
-            allowNull: false,
-            type: Sequelize.DATE
-        }
+          allowNull: false,
+          type: Sequelize.DATE
+        },
     });
   },
   async down(queryInterface, Sequelize) {

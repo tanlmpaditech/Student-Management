@@ -1,0 +1,109 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students</title>
+</head>
+<style>
+    h2 {
+        text-align: center;
+    }
+
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+    button.btn-edit {
+        outline: none;
+        border: none;
+        background-color: orange;
+        height: 25px;
+        width: 60px;
+        border-radius: 4px;
+        cursor: pointer;
+        color: white;
+    }
+
+    button.btn-delete {
+        outline: none;
+        border: none;
+        background-color: red;
+        height: 25px;
+        width: 60px;
+        border-radius: 4px;
+        cursor: pointer;
+        color: white;
+    }
+
+    a {
+        text-decoration: none;
+        width: 60px;
+
+    }
+</style>
+
+<body>
+
+    <h2>List Student</h2>
+    <table>
+        <tr>
+            <th>Student ID</th>
+            <th>Full name</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Phone number</th>
+            <th>Gender</th>
+            <th>Action</th>
+
+        </tr>
+        <% for(let i=0; i < dataTable.length; i++) { %>
+            <tr>
+                <td>
+                    <%= dataTable[i].studentId %>
+                </td>
+                <td>
+                    <%= dataTable[i].fullName %>
+                </td>
+                <td>
+                    <%= dataTable[i].email %>
+                </td>
+                <td>
+                    <%= dataTable[i].address %>
+                </td>
+                <td>
+                    <%= dataTable[i].phoneNumber %>
+                </td>
+                <td>
+                    <%= dataTable[i].gender %>
+                </td>
+                <td>
+                    <a href="/edit-student?id=<%= dataTable[i].id %>">
+                        <button class="btn-edit" type="button">Edit</button>
+                    </a>
+
+
+                    <a href="">
+                        <button class="btn-delete" type="button">Delete</button>
+                    </a>
+
+                </td>
+            </tr>
+            <% } %>
+    </table>
+</body>
+
+</html>

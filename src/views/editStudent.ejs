@@ -1,0 +1,68 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Student</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+
+        <form action="/put-student" method="POST">
+            <h2 class="col-12 mt-3 text-center text-uppercase">Edit a student</h2>
+            <div class="form-group">
+                <label for="inputStudentId">Student ID</label>
+                <input type="text" class="form-control" name="studentId" placeholder="StudentID"
+                    value="<%= student.studentId %>">
+            </div>
+            <div class="form-group">
+                <label for="name">Full name</label>
+                <input type="text" class="form-control" name="fullName" placeholder="Name"
+                    value="<%= student.fullName %>">
+            </div>
+            <div class="form-group">
+                <label for="inputEmail">Email</label>
+                <input type="email" class="form-control" name="email" placeholder="Email" value="<%= student.email %>">
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" class="form-control" name="address" placeholder="Name"
+                    value="<%= student.address %>">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="inputPhone">Phone</label>
+                    <input type="text" class="form-control" name="phoneNumber" placeholder="+84"
+                        value="<%= student.phoneNumber %>">
+                </div>
+                <!-- <div class="form-group col-md-6">
+                    <label for="inputState">Gender</label>
+                    <select name="gender" class="form-control">
+                        <option selected value="<%= student.gender %>">Male</option>
+                        </option>
+                        <option value="female">Female</option>
+                        <option value="others">Others</option>
+                    </select>
+                </div> -->
+
+                <input type="text" class="form-control" name="id" value="<%= student.id %>" hidden />
+            </div>
+            <button type="submit" class="btn btn-primary" onclick="">Edit</button>
+        </form>
+    </div>
+</body>
+
+</html>

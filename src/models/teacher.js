@@ -18,13 +18,10 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     fullName: DataTypes.STRING,
     phoneNumber: DataTypes.STRING,
-    gender: DataTypes.BOOLEAN,
-    createAt: DataTypes.TIME,
-    updateAt: DataTypes.TIME,
+    gender: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Teacher',
-    timestamps: true,
   });
   return Teacher;
 };

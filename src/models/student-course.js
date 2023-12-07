@@ -16,11 +16,11 @@ module.exports = (sequelize, DataTypes) => {
   Student_Course.init({
     courseId: DataTypes.STRING,
     studentId: DataTypes.STRING,
-    score: DataTypes.INTEGER
+    score: DataTypes.INTEGER,
+
   }, {
     sequelize,
     modelName: 'Student_Course',
-    timestamps: true,
   });
   return Student_Course;
 };

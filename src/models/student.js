@@ -15,17 +15,14 @@ module.exports = (sequelize, DataTypes) => {
   }
   Student.init({
     studentId: DataTypes.STRING,
-    email: DataTypes.STRING,
     fullName: DataTypes.STRING,
+    email: DataTypes.STRING,
+    address: DataTypes.STRING,
     phoneNumber: DataTypes.STRING,
-    gender: DataTypes.BOOLEAN,
-    createAt: DataTypes.TIME,
-    updateAt: DataTypes.TIME,
-    // roleId: DataTypes.STRING,
+    gender: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Student',
-    timestamps: true,
   });
   return Student;
 };

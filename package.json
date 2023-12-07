@@ -5,12 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec ./node_modules/.bin/babel-node src/server.js"
+    "start": "nodemon --exec ./node_modules/.bin/babel-node src/index.js"
   },
   "keywords": [
-    "Fullstack",
-    "-",
-    "SERN"
+    "Student Management"
   ],
   "author": "Tan",
   "license": "ISC",
@@ -19,7 +17,8 @@
     "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
-    "mysql2": "^3.6.5"
+    "mysql2": "^3.6.5",
+    "tailwindcss": "^3.3.6"
   },
   "devDependencies": {
     "@babel/core": "^7.23.5",

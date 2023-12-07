@@ -17,10 +17,10 @@ module.exports = (sequelize, DataTypes) => {
     key: DataTypes.STRING,
     type: DataTypes.STRING,
     value: DataTypes.STRING,
+
   }, {
     sequelize,
     modelName: 'AllCode',
-    timestamps: true,
   });
   return AllCode;
 };
