@@ -1,3 +1,4 @@
+
 import db from '../models/index'
 
 let getStudentById = (studentId) => {
@@ -19,7 +20,6 @@ let getStudentById = (studentId) => {
 }
 
 let updateStudent = (data) => {
-    console.log(data);
     return new Promise(async (resolve, reject) => {
         try {
             let student = await db.Student.findOne({ 
@@ -39,4 +39,20 @@ let updateStudent = (data) => {
     })
 }
 
-export { getStudentById, updateStudent };
+let dropStudent = (studentId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let student = await db.Student.findOne({
+                where: { id: studentId }
+            })
+            if (student) {
+                await student.destroy();
+            }
+            resolve();
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
+export { getStudentById, updateStudent, dropStudent };

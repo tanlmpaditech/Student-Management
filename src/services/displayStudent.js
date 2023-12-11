@@ -1,4 +1,4 @@
-import db from "../models";
+import db from "../models/index";
 
 let displayStudent = () => {
     return new Promise(async (resolve, reject) => {

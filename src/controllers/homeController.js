@@ -1,7 +1,7 @@
-import db from '../models/index'
+// import db from '../models/index'
 import createNewStudent from '../services/createStudent';
 import displayStudent from '../services/displayStudent';
-import  { getStudentById, updateStudent } from '../services/editStudent';
+import  { getStudentById, updateStudent, dropStudent } from '../services/editStudent';
 
 // let getHomePage = async (req, res) => {
 //     try{
@@ -54,10 +54,22 @@ let editStudent = async (req, res) => {
     }
 }
 
-let putStudent = async (req, res) => {
+let putStudentEdited = async (req, res) => {
     let data = req.body;
-    await updateStudent(data);
+    if(data) {
+        await updateStudent(data);
+    }
     return res.redirect('/students');
 }
 
-export { getHomePage, createStudent, postStudent, getAllStudents, editStudent, putStudent };
+let deleteStudent = async (req, res) => {
+    let id = req.query.id;
+    if(id) {
+        await dropStudent(id);
+    } else {
+        return res.send('Student not found');
+    }
+    return res.redirect('/students');
+}
+
+export { getHomePage, createStudent, postStudent, getAllStudents, editStudent, putStudentEdited , deleteStudent };
