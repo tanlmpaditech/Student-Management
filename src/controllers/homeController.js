@@ -34,12 +34,14 @@ let postStudent = async (req, res) => {
 
 let getAllStudents = async (req, res) => {
     let data = await displayStudent();
-    console.log('--------------------------------');
-    console.log(data);
-    console.log('--------------------------------');
-    return res.render('displayStudent.ejs', {
-        dataTable: data
-    });
+    // console.log('--------------------------------');
+    // console.log(data);
+    // console.log('--------------------------------');
+    // return res.render('displayStudent.ejs', {
+    //     dataTable: data
+    // });
+    console.log("data:", data);
+    return data;
 }   
 
 let editStudent = async (req, res) => {
