@@ -1,5 +1,6 @@
 import express from 'express';
-import { getHomePage, createStudent, postStudent, getAllStudents, editStudent, putStudentEdited, deleteStudent } from '../controllers/homeController';
+import { getHomePage, createStudent, getAllStudents, handleEditStudent, handleDeleteStudent } from '../controllers/studentController';
+
 import handleLogin from '../controllers/adminController';
 
 let router = express.Router();
@@ -7,12 +8,10 @@ let router = express.Router();
 let initWebRouter = (app) => {
     router.get('/', getHomePage);
     
-    router.get('/create-student', createStudent);
-    router.post('/post-student', postStudent);
+    router.post('/create-student', createStudent);
     router.get('/students', getAllStudents);
-    router.get('/edit-student', editStudent);
-    router.post('/put-student', putStudentEdited);
-    router.get('/delete-student', deleteStudent);
+    router.get('/edit-student', handleEditStudent);
+    router.delete('/delete-student', handleDeleteStudent);
 
     router.post('/login', handleLogin);
     return app.use('/', router)
