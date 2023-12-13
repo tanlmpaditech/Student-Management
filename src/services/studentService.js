@@ -1,6 +1,17 @@
 
 import db from '../models/index'
 
+let displayStudent = () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let students = await db.Student.findAll({raw: true});
+            resolve(students); 
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
 let getStudentById = (studentId) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -61,7 +72,10 @@ let createNewStudent = async (data) => {
                 phoneNumber: data.phoneNumber,
                 gender: data.gender,
             })
-            resolve(db.Student);
+            resolve({
+                errCode: '0',
+                message: 'Student created successfully'
+            });
         } catch (err) { 
             reject(err);
         }
@@ -93,4 +107,5 @@ let deleteStudent = (studentId) => {
     })
 }
 
-export { getStudentById, updateStudent, deleteStudent, createNewStudent };
+
+export { displayStudent, getStudentById, updateStudent, deleteStudent, createNewStudent };

@@ -10,7 +10,7 @@ let initWebRouter = (app) => {
     
     router.post('/create-student', createStudent);
     router.get('/students', getAllStudents);
-    router.get('/edit-student', handleEditStudent);
+    router.put('/edit-student', handleEditStudent);
     router.delete('/delete-student', handleDeleteStudent);
 
     router.post('/login', handleLogin);
