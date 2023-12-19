@@ -83,6 +83,7 @@ let createNewStudent = async (data) => {
 }
 
 let deleteStudent = (studentId) => {
+console.log(studentId)
     return new Promise(async (resolve, reject) => {
         try {
             let student = await db.Student.findOne({

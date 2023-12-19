@@ -3,6 +3,9 @@ import  { displayStudent, updateStudent, deleteStudent, createNewStudent } from 
 
 
 let getHomePage = async (req, res) => {
+    console.log('Cookies: ', req.cookies)
+    // console.log('Signed Cookies: ', req.signedCookies)
+    // res.cookie('test', 'test');
     return res.render("homepage.ejs");
 }
 
@@ -26,6 +29,7 @@ let handleEditStudent = async (req, res) => {
 }
 
 let handleDeleteStudent = async (req, res) => {
+    console.log(req)
     if(!req.body.id) {
         return res.status(200).json({
             errCode: 2,
