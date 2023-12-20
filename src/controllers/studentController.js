@@ -9,7 +9,7 @@ let getHomePage = async (req, res) => {
     return res.render("homepage.ejs");
 }
 
-let createStudent = async (req, res) => {
+let handleCreateStudent = async (req, res) => {
     let data = req.body;
     let message = await createNewStudent(data);
     console.log(data);
@@ -41,4 +41,4 @@ let handleDeleteStudent = async (req, res) => {
     return res.status(200).json(message);
 }
 
-export { getHomePage, createStudent, getAllStudents, handleEditStudent, handleDeleteStudent };
+export { getHomePage, handleCreateStudent, getAllStudents, handleEditStudent, handleDeleteStudent };

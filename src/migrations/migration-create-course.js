@@ -17,15 +17,18 @@ module.exports = {
             allowNull: false,
             type: Sequelize.STRING,
         },
-        time: {
-            type: Sequelize.TIME
-        },
-        teacherId: {
+        courseName: {
             type: Sequelize.STRING
         },
-        numberOfStudent: {
-            type: Sequelize.INTEGER
+        time: {
+            type: Sequelize.STRING
         },
+        teacherName: {
+            type: Sequelize.STRING
+        },
+        // numberOfStudent: {
+        //     type: Sequelize.INTEGER
+        // },
         createdAt: {
           allowNull: false,
           type: Sequelize.DATE
