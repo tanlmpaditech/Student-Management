@@ -54,5 +54,36 @@ let deleteCourse = (courseId) => {
     })
 }
 
+let updateCourse = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if(!data.id) {
+                resolve({
+                    errCode: 2,
+                    message: 'Missing id parameter',
+                })
+            }
+            let course = await db.Course.findOne({ 
+                where: { id: data.id }
+            });
+            if(course) {
+                course.update(data);
+                course.save();
+                resolve({
+                    errCode: '0',
+                    message: 'Course updated successfully'
+                })
+            } else {
+                resolve({
+                    errCode: '1',
+                    message: 'Course not found'
+                });
+            }
+        } catch (error) {
+            reject(error);
+        }
+    })
+}
 
-export { displayCourse, createNewCourse, deleteCourse }
+
+export { displayCourse, createNewCourse, deleteCourse, updateCourse }

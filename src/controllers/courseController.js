@@ -1,4 +1,4 @@
-import { displayCourse, createNewCourse, deleteCourse } from '../services/courseService'
+import { displayCourse, createNewCourse, deleteCourse, updateCourse } from '../services/courseService'
 
 let getAllCourses = async (req, res) => {
     let data = await displayCourse();
@@ -13,6 +13,12 @@ let handleCreateCourse = async (req, res) => {
     return res.status(200).json(message);
 }
 
+let handleEditCourse = async (req, res) => {
+    let data = req.body;
+    let message = await updateCourse(data);
+    return res.status(200).json(message);
+}
+
 let handleDeleteCourse = async (req, res) => {
     if(!req.body.id) {
         return res.status(200).json({
@@ -24,4 +30,4 @@ let handleDeleteCourse = async (req, res) => {
     let message = await deleteCourse(req.body.id);
     return res.status(200).json(message);
 }
-export { getAllCourses, handleCreateCourse, handleDeleteCourse } ;
+export { getAllCourses, handleCreateCourse, handleDeleteCourse, handleEditCourse } ;

@@ -10,7 +10,6 @@ let getHomePage = async (req, res) => {
 let handleCreateStudent = async (req, res) => {
     let data = req.body;
     let message = await createNewStudent(data);
-    console.log(data);
     return res.status(200).json(message);
 }
 
@@ -27,7 +26,6 @@ let handleEditStudent = async (req, res) => {
 }
 
 let handleDeleteStudent = async (req, res) => {
-    console.log(req)
     if(!req.body.id) {
         return res.status(200).json({
             errCode: 2,

@@ -1,6 +1,6 @@
 import express from 'express';
 import { getHomePage, handleCreateStudent, getAllStudents, handleEditStudent, handleDeleteStudent } from '../controllers/studentController';
-import { getAllCourses, handleCreateCourse, handleDeleteCourse } from '../controllers/courseController';
+import { getAllCourses, handleCreateCourse, handleDeleteCourse, handleEditCourse } from '../controllers/courseController';
 import { handleLogin, handleCreateAdmin } from '../controllers/adminController';
 import { getAllStudentOnCourse, handleAddStudentToCourse, handleDeleteStudentFromCourse } from '../controllers/student-courseController'
 
@@ -16,6 +16,7 @@ let initWebRouter = (app) => {
 
     router.get('/courses', getAllCourses);
     router.post('/create-course', handleCreateCourse);
+    router.put('/edit-course', handleEditCourse);
     router.delete('/delete-course', handleDeleteCourse);
 
     router.get('/course/:courseId', getAllStudentOnCourse);
