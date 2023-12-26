@@ -11,6 +11,7 @@ module.exports = {
         },
         studentId: {
             allowNull: false,
+            // primaryKey: false,
             type: Sequelize.INTEGER,
         },
         fullName: {

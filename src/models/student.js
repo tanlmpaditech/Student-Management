@@ -2,6 +2,10 @@
 const {
   Model
 } = require('sequelize');
+
+// import Course from './course';
+// import Student_Course from './student-course';
+
 module.exports = (sequelize, DataTypes) => {
   class Student extends Model {
     /**
@@ -11,6 +15,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      // this.belongsToMany(models.Course, { through: "Student_Course", foreignKey: 'studentId' });
+      this.hasMany(models.Student_Course)
+      // this.belongsToMany(models.Course, { as: 'Student', through: 'Student_Course' });
     }
   }
   Student.init({
@@ -23,7 +30,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Student',
-  });
+  })
   return Student;
-};
+}
+  
+
 

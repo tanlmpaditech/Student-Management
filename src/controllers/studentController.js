@@ -4,8 +4,6 @@ import  { displayStudent, updateStudent, deleteStudent, createNewStudent } from 
 
 let getHomePage = async (req, res) => {
     console.log('Cookies: ', req.cookies)
-    // console.log('Signed Cookies: ', req.signedCookies)
-    // res.cookie('test', 'test');
     return res.render("homepage.ejs");
 }
 

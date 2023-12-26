@@ -15,7 +15,9 @@ module.exports = {
         },
         courseId: {
             allowNull: false,
+            // primaryKey: false,
             type: Sequelize.STRING,
+            
         },
         courseName: {
             type: Sequelize.STRING

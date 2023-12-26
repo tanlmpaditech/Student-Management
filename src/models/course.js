@@ -2,6 +2,8 @@
 const {
   Model
 } = require('sequelize');
+// import Student from './student';
+// import Student_Course from './student-course';
 module.exports = (sequelize, DataTypes) => {
   class Course extends Model {
     /**
@@ -11,6 +13,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+        this.hasMany(models.Student_Course)
+        // this.belongsToMany(models.Student, { as: 'Course',  through: 'Student_Course' });
     }
   }
   Course.init({
@@ -24,5 +28,6 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Course',
   });
+  
   return Course;
 };

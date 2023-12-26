@@ -1,6 +1,11 @@
+
 'use strict';
+// import course from '../models/course';
+
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
+
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('student_courses', {
     // courseId: DataTypes.STRING,
@@ -15,10 +20,18 @@ module.exports = {
         courseId: {
             allowNull: false,
             type: Sequelize.STRING,
+            // references: {
+            //   model: Course,
+            //   key: 'id'
+            // }
         },
         studentId: {
             allowNull: false,
             type: Sequelize.STRING,
+            // references: {
+            //   model: Student,
+            //   key: 'id'
+            // }
         },
         // score: {
         //     type: Sequelize.INTEGER

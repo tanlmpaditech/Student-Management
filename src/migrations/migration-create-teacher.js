@@ -16,6 +16,7 @@ module.exports = {
         },
         teacherId: {
             allowNull: false,
+            // primaryKey: true,
             type: Sequelize.STRING,
         },
         email: {

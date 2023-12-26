@@ -31,13 +31,11 @@ let createNewCourse = async (data) => {
 }
 
 let deleteCourse = (courseId) => {
-// console.log(courseId);
     return new Promise(async (resolve, reject) => {
         try {
             let course = await db.Course.findOne({
                 where: { id: courseId }
             })
-            // console.log(course);
             if (course) {
                 await course.destroy();
                 resolve({

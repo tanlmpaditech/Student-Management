@@ -8,7 +8,6 @@ let handleLogin = async (req, res) => {
     let adminData = await handleAdminLogin(email, password);
 
     res.cookie('jwt', adminData.token, { httpOnly: false })
-    // console.log(adminData.token);
     if(!email || !password) {
         return res.status(200).json({
             errCode: 1,

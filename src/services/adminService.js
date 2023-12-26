@@ -60,12 +60,9 @@ let handleAdminLogin = (email, password) => {
                         }
                         const token = createJwt(payload);
                         adminData.token = token;
-                        // console.log(admin);
-                        // console.log(token);
-
+                        
                         delete admin.password;
-                        // adminData.admin = admin;
-                        // console.log(admin.email);
+                    
                     } else {
                         adminData.errCode = 3;
                         adminData.errMessage = 'Password incorrect';

@@ -9,6 +9,13 @@ const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
 
+// import Student from './student';
+// import Course from './course';
+// import Student_Course from './student-course';
+
+
+// db.Student = require('./student');
+// db.Course = require('./course');
 
 let sequelize;
 if (config.use_env_variable) {
@@ -40,5 +47,17 @@ Object.keys(db).forEach(modelName => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+
+
+
+// db.Student.belongsToMany(db.Course, {
+//   through: "Student_Course",
+//   foreignKey: "studentId",
+// }) 
+
+// db.Course.belongsToMany(db.Student, {
+//   through: "Student_Course",
+//   foreignKey: "courseId",
+// }) 
 
 module.exports = db;

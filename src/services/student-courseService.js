@@ -1,33 +1,27 @@
 import db from '../models/index'
 
 let displayStudentOnCourse = (courseId) => {
-    // console.log(db.Student_Course.findAll({raw: true}));
     return new Promise(async (resolve, reject) => {
         try {
-            let students = await db.Student_Course.find({where: {id: courseId}}, {raw: true});
-            // let students = await db.Student_Course.findAll({raw: true});
-            
-            resolve(students); 
+            let students = await db.Student.findAll({
+                include: [{
+                    model: db.Student_Course,
+                    where: {
+                        courseId: courseId.courseId
+                    }
+                }]
+            });
+            resolve(students);
         } catch (error) {
             reject(error);
         }
     });
 }
 
-let addNewStudentToCourse = async (data) => {
+let addNewStudentToCourse = async (courseId, studentId) => {
     return new Promise(async(resolve, reject) => {
         try {
-            await db.Student_Course.create({
-                // studentId: data.studentId,
-                // fullName: data.fullName,
-                // email: data.email,
-                // address: data.address,
-                // phoneNumber: data.phoneNumber,
-                // gender: data.gender,
-                // courseId: data.courseId,
-                
-                studentId: data.studentId,
-            })
+            await db.Student_Course.create({ courseId: courseId, studentId: studentId })
             resolve({
                 errCode: '0',
                 message: 'Add student successfully'
@@ -38,14 +32,12 @@ let addNewStudentToCourse = async (data) => {
     });
 }
 
-let deleteStudentFromCourse = (studentId) => {
-// console.log(courseId);
+let deleteStudentFromCourse = (courseId, studentId) => {
     return new Promise(async (resolve, reject) => {
         try {
             let student = await db.Student_Course.findOne({
-                where: { studentId: studentId }
+                where: { studentId: studentId, courseId: courseId }
             })
-            // console.log(course);
             if (student) {
                 await student.destroy();
                 resolve({
