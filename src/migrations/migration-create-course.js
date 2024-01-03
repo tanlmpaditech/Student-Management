@@ -28,6 +28,9 @@ module.exports = {
         teacherName: {
             type: Sequelize.STRING
         },
+        quantity: {
+            type: Sequelize.INTEGER
+        },
         // numberOfStudent: {
         //     type: Sequelize.INTEGER
         // },

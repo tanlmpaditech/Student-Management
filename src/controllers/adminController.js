@@ -7,17 +7,15 @@ let handleLogin = async (req, res) => {
     let password = req.body.password;
     let adminData = await handleAdminLogin(email, password);
 
-    res.cookie('jwt', adminData.token, { httpOnly: false })
+    // res.cookie('jwt', adminData.token, { httpOnly: true, maxAge: 60*60*1000 })
     if(!email || !password) {
         return res.status(200).json({
             errCode: 1,
             message: 'Missing email or password',
             admin: adminData.admin ? adminData.admin : {}
-            // admin: adminData.adminData.admin
         })
     }
     return res.status(200).json({ adminData })
-    // return res.send('Hello')
 }
 
 let handleCreateAdmin = async (req, res) => {
@@ -25,5 +23,7 @@ let handleCreateAdmin = async (req, res) => {
     let message = await createNewAdmin(data);
     return res.status(200).json(message);
 }
+
+
 
 export {handleLogin, handleCreateAdmin};

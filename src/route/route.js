@@ -2,7 +2,8 @@ import express from 'express';
 import { getHomePage, handleCreateStudent, getAllStudents, handleEditStudent, handleDeleteStudent } from '../controllers/studentController';
 import { getAllCourses, handleCreateCourse, handleDeleteCourse, handleEditCourse } from '../controllers/courseController';
 import { handleLogin, handleCreateAdmin } from '../controllers/adminController';
-import { getAllStudentOnCourse, handleAddStudentToCourse, handleDeleteStudentFromCourse } from '../controllers/student-courseController'
+import { getAllStudentOnCourse, handleAddStudentToCourse, handleDeleteStudentFromCourse, handleRegisterStudentToCourse } from '../controllers/student-courseController'
+// import { checkJWT } from '../middleware/JWTAction';
 
 let router = express.Router({mergeParams:true});
 
@@ -21,6 +22,7 @@ let initWebRouter = (app) => {
 
     router.get('/course/:courseId', getAllStudentOnCourse);
     router.post('/add-student-to-course/:courseId', handleAddStudentToCourse);
+    router.post('/register-student-to-course', handleRegisterStudentToCourse);
     router.delete('/delete-student-from-course/:courseId', handleDeleteStudentFromCourse);
 
     router.post('/login', handleLogin);

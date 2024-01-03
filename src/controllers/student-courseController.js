@@ -1,4 +1,4 @@
-import { displayStudentOnCourse, addNewStudentToCourse, deleteStudentFromCourse } from '../services/student-courseService'
+import { displayStudentOnCourse, addNewStudentToCourse, deleteStudentFromCourse, registerStudentToCourse } from '../services/student-courseService'
 
 let getAllStudentOnCourse = async (req, res) => {
     let data = await displayStudentOnCourse(req.params);
@@ -30,4 +30,12 @@ let handleDeleteStudentFromCourse = async (req, res) => {
     let message = await deleteStudentFromCourse(courseId, studentId);
     return res.status(200).json(message);
 }
-export { getAllStudentOnCourse, handleAddStudentToCourse, handleDeleteStudentFromCourse } ;
+
+let handleRegisterStudentToCourse = async (req, res) => {
+    let courseId = req.body.courseId;
+    let studentId = req.body.studentId;
+    // console.log(courseId, studentId);
+    let message = await registerStudentToCourse(courseId, studentId);
+    return res.status(200).json(message);
+}
+export { getAllStudentOnCourse, handleAddStudentToCourse, handleDeleteStudentFromCourse, handleRegisterStudentToCourse } ;
