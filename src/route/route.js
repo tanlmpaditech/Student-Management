@@ -22,8 +22,9 @@ let initWebRouter = (app) => {
 
     router.get('/course/:courseId', getAllStudentOnCourse);
     router.post('/add-student-to-course/:courseId', handleAddStudentToCourse);
-    router.post('/register-student-to-course', handleRegisterStudentToCourse);
+    router.post('/register-course', handleRegisterStudentToCourse);
     router.delete('/delete-student-from-course/:courseId', handleDeleteStudentFromCourse);
+
 
     router.post('/login', handleLogin);
     router.post('/register', handleCreateAdmin);

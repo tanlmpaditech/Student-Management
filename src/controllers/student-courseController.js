@@ -34,7 +34,6 @@ let handleDeleteStudentFromCourse = async (req, res) => {
 let handleRegisterStudentToCourse = async (req, res) => {
     let courseId = req.body.courseId;
     let studentId = req.body.studentId;
-    // console.log(courseId, studentId);
     let message = await registerStudentToCourse(courseId, studentId);
     return res.status(200).json(message);
 }

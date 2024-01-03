@@ -57,30 +57,42 @@ let deleteStudentFromCourse = (courseId, studentId) => {
 }
 
 let registerStudentToCourse = (courseId, studentId) => {
+    let courseQuantity, registerCourseTime, numberOfStudentInCourse, courseTime, studentCourseTime, courseTimeRegisterSplit
     return new Promise(async(resolve, reject) => {
         let student = await db.Student_Course.findOne({
             where: { studentId: studentId , courseId: courseId }
         })
-        let numberOfStudentInCourse = await db.Student_Course.count({
-            where: { courseId: courseId }
-        })
+
         let course = await db.Course.findOne({
             where: { id: courseId }
         })
-        let courseTime = await db.Course.findAll({
-            attributes: ['time'],
-            where: {'$student_courses.studentId$': studentId},
-            include: [{
-                model: db.Student_Course,
-            }], 
-        })  
-        let studentCourseTime = courseTime.map((data) => data.dataValues.time);
-        let courseQuantity = course.quantity;
-        let registerCourseTime = course.time;
+
+        let existStudent = await db.Student.findOne({
+            where: { id: studentId }
+        })
+
+        if (course && existStudent) {
+            courseQuantity = course.quantity;
+            registerCourseTime = course.time;
+            numberOfStudentInCourse = await db.Student_Course.count({
+                where: { courseId: courseId }
+            })
+
+            courseTime = await db.Course.findAll({
+                attributes: ['time'],
+                where: {'$student_courses.studentId$': studentId},
+                include: [{
+                    model: db.Student_Course,
+                }], 
+            })
+
+            studentCourseTime = courseTime.map((data) => data.dataValues.time);
+            courseTimeRegisterSplit = registerCourseTime.split(' ');
+        }
+        
         // console.log(studentCourseTime);
         // console.log(registerCourseTime);
         // console.log(studentCourseTime.includes(registerCourseTime))
-        let courseTimeRegisterSplit = registerCourseTime.split(' ');
 
         let checkConflictCourseTime = () => {
             let boolean = false;
@@ -139,7 +151,7 @@ let registerStudentToCourse = (courseId, studentId) => {
                 }
                 
             })
-            console.log(boolean);
+            // console.log(boolean);
             return boolean;
         }
         // console.log(checkConflictCourseTime());
@@ -150,17 +162,29 @@ let registerStudentToCourse = (courseId, studentId) => {
                     errCode: '1',
                     message: 'Student already exists in course'
                 });
-            } else if(numberOfStudentInCourse >= courseQuantity) {
+            } else if(!course) {
                 resolve({
                     errCode: '2',
+                    message: 'Course ID is not exist'
+                }); 
+            }
+            else if(!existStudent)  {
+                resolve({
+                    errCode: '3',
+                    message: 'Student ID is not exist'
+                }); 
+            } else if(numberOfStudentInCourse >= courseQuantity) {
+                resolve({
+                    errCode: '4',
                     message: 'This course is full'
                 }); 
             } else if(checkConflictCourseTime()){
                 resolve({
-                    errCode: '3',
+                    errCode: '5',
                     message: 'Students is conflicting course times'
                 }); 
-            } else {
+            } 
+            else {
                 await db.Student_Course.create({ 
                     courseId: courseId,
                     studentId: studentId
