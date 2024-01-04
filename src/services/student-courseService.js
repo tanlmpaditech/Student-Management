@@ -56,44 +56,71 @@ let deleteStudentFromCourse = (courseId, studentId) => {
     })
 }
 
-let checkConflictCourseTime = (studentCourseTime, courseTimeRegisterSplit) => {
-    let boolean = false;
-    let time;
-    studentCourseTime.forEach((item) => {
-        let courseTimeExist = item.split(' ');
-        console.log(courseTimeExist);
-        if(courseTimeExist.includes(courseTimeRegisterSplit[1])) {
+// let checkConflictCourseTime = (studentCourseTime, courseTimeRegisterSplit) => {
+//     let boolean = false;
+//     let time;
+//     studentCourseTime.forEach((item) => {
+//         let courseTimeExist = item.split(' ');
+//         console.log(courseTimeExist);
+//         if(courseTimeExist.includes(courseTimeRegisterSplit[1])) {
+//             boolean = true;
+//         }
+//         if(boolean === true) {
+//             time = courseTimeExist.filter((item) => 
+//                 item.includes(courseTimeRegisterSplit[1])
+//             )
+//             for(let i = 0; i < time.length; i+=2) {
+//                 let timeExisted = courseTimeExist[i].slice(0, -1).split('-');
+//                 let timeRegister = courseTimeRegisterSplit[0].slice(0, -1).split('-');
+//                 for(let j = 0; j < timeExisted.length; j+=2) {
+                    
+//                     if(+timeRegister[0] >= +timeExisted[j] && +timeRegister[0] < +timeExisted[j+1]) {
+//                         boolean = true;
+//                     } else if(+timeRegister[1] > +timeExisted[j] && +timeRegister[1] <= +timeExisted[j+1]) {
+//                         boolean = true;
+//                     } 
+//                     else {
+//                         boolean = false;
+//                     }
+//                 }
+//             }
+//         } else {
+//             boolean = false;
+//         }
+//     })
+//     return boolean;
+// }
+
+let checkConflictCourseTime = (studentCourseTimeExisted, studentCourseDateExisted, courseTimeRegister, courseDateRegister) => {
+    let boolean = false, count = 0;
+
+    if(studentCourseDateExisted.includes(courseDateRegister)) {
             boolean = true;
         }
         if(boolean === true) {
-            time = courseTimeExist.filter((item) => 
-                item.includes(courseTimeRegisterSplit[1])
-            )
-            for(let i = 0; i < time.length; i+=2) {
-                let timeExisted = courseTimeExist[i].slice(0, -1).split('-');
-                let timeRegister = courseTimeRegisterSplit[0].slice(0, -1).split('-');
+            let timeRegister = courseTimeRegister.slice(0, -1).split('-');
+            for(let i = 0; i < studentCourseTimeExisted.length; i++) {
+                let timeExisted = studentCourseTimeExisted[i].slice(0, -1).split('-');
                 for(let j = 0; j < timeExisted.length; j+=2) {
-                    
                     if(+timeRegister[0] >= +timeExisted[j] && +timeRegister[0] < +timeExisted[j+1]) {
-                        boolean = true;
+                        count++
                     } else if(+timeRegister[1] > +timeExisted[j] && +timeRegister[1] <= +timeExisted[j+1]) {
-                        boolean = true;
+                        count++
                     } 
-                    else {
-                        boolean = false;
-                    }
                 }
             }
+            if(count === 0) boolean = false;
+            console.log("count: ", count);
         } else {
             boolean = false;
         }
-    })
     return boolean;
 }
 
+
 let registerStudentToCourse = (courseId, studentId) => {
-    let courseQuantity, registerCourseTime, numberOfStudentInCourse, courseTime, studentCourseTime, courseTimeRegisterSplit
     return new Promise(async(resolve, reject) => {
+        let courseQuantity, studentCourseTimeExisted, studentCourseDateExisted, registerCourseTime, registerCourseDate, numberOfStudentInCourse;
         let student = await db.Student_Course.findOne({
             where: { studentId: studentId , courseId: courseId }
         })
@@ -105,24 +132,30 @@ let registerStudentToCourse = (courseId, studentId) => {
         let existStudent = await db.Student.findOne({
             where: { id: studentId }
         })
-
+        
         if (course && existStudent) {
             courseQuantity = course.quantity;
             registerCourseTime = course.time;
+            registerCourseDate = course.date;
             numberOfStudentInCourse = await db.Student_Course.count({
                 where: { courseId: courseId }
             })
 
-            courseTime = await db.Course.findAll({
+            let studentCourseTimeExisted_ = await db.Course.findAll({
                 attributes: ['time'],
+                where: { date : registerCourseDate }
+            })
+
+            let studentCourseDateExisted_ = await db.Course.findAll({
+                attributes: ['date'],
                 where: {'$student_courses.studentId$': studentId},
                 include: [{
                     model: db.Student_Course,
                 }], 
             })
 
-            studentCourseTime = courseTime.map((data) => data.dataValues.time);
-            courseTimeRegisterSplit = registerCourseTime.split(' ');
+            studentCourseTimeExisted = studentCourseTimeExisted_.map((data) => data.dataValues.time);
+            studentCourseDateExisted = studentCourseDateExisted_.map((data) => data.dataValues.date);
         }
         try {
             if(student) {
@@ -135,12 +168,12 @@ let registerStudentToCourse = (courseId, studentId) => {
                     errCode: '2',
                     message: 'Course ID or Student ID is not exist'
                 }); 
-            } else if(numberOfStudentInCourse >= courseQuantity) {
+            } else if(numberOfStudentInCourse && courseQuantity && numberOfStudentInCourse >= courseQuantity) {
                 resolve({
                     errCode: '4',
                     message: 'This course is full'
                 }); 
-            } else if(checkConflictCourseTime(studentCourseTime, courseTimeRegisterSplit)){
+            } else if(checkConflictCourseTime(studentCourseTimeExisted, studentCourseDateExisted, registerCourseTime, registerCourseDate) == true){
                 resolve({
                     errCode: '5',
                     message: 'Students is conflicting course times'
