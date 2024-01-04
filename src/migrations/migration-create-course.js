@@ -25,7 +25,10 @@ module.exports = {
         time: {
             type: Sequelize.STRING
         },
-        teacherName: {
+        date: {
+            type: Sequelize.STRING
+        },
+        teacherId: {
             type: Sequelize.STRING
         },
         quantity: {

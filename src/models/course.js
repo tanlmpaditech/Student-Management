@@ -21,7 +21,8 @@ module.exports = (sequelize, DataTypes) => {
     courseId: DataTypes.STRING,
     courseName: DataTypes.STRING,
     time: DataTypes.STRING,
-    teacherName: DataTypes.STRING,
+    date: DataTypes.STRING,
+    teacherId: DataTypes.STRING,
     quantity: DataTypes.INTEGER,
     // numberOfStudent: DataTypes.INTEGER,
 
