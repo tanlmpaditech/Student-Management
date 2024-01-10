@@ -1,8 +1,8 @@
 import express from 'express';
-import { getHomePage, handleCreateStudent, getAllStudents, handleEditStudent, handleDeleteStudent } from '../controllers/studentController';
-import { getAllCourses, handleCreateCourse, handleDeleteCourse, handleEditCourse } from '../controllers/courseController';
-import { handleLogin, handleCreateAdmin } from '../controllers/adminController';
-import { getAllStudentOnCourse, handleAddStudentToCourse, handleDeleteStudentFromCourse, handleRegisterStudentToCourse } from '../controllers/student-courseController'
+import { getHomePage, handleCreateStudent, getAllStudents, handleEditStudent, handleDeleteStudent } from '../controllers/StudentController';
+import { getAllCourses, handleCreateCourse, handleDeleteCourse, handleEditCourse } from '../controllers/CourseController';
+import { handleLogin, handleCreateAdmin } from '../controllers/AdminController';
+import { getAllStudentOnCourse, handleAddStudentToCourse, handleDeleteStudentFromCourse, handleRegisterStudentToCourse } from '../controllers/Student_CourseController'
 // import { checkJWT } from '../middleware/JWTAction';
 
 let router = express.Router({mergeParams:true});

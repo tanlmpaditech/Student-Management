@@ -56,41 +56,6 @@ let deleteStudentFromCourse = (courseId, studentId) => {
     })
 }
 
-// let checkConflictCourseTime = (studentCourseTime, courseTimeRegisterSplit) => {
-//     let boolean = false;
-//     let time;
-//     studentCourseTime.forEach((item) => {
-//         let courseTimeExist = item.split(' ');
-//         console.log(courseTimeExist);
-//         if(courseTimeExist.includes(courseTimeRegisterSplit[1])) {
-//             boolean = true;
-//         }
-//         if(boolean === true) {
-//             time = courseTimeExist.filter((item) => 
-//                 item.includes(courseTimeRegisterSplit[1])
-//             )
-//             for(let i = 0; i < time.length; i+=2) {
-//                 let timeExisted = courseTimeExist[i].slice(0, -1).split('-');
-//                 let timeRegister = courseTimeRegisterSplit[0].slice(0, -1).split('-');
-//                 for(let j = 0; j < timeExisted.length; j+=2) {
-                    
-//                     if(+timeRegister[0] >= +timeExisted[j] && +timeRegister[0] < +timeExisted[j+1]) {
-//                         boolean = true;
-//                     } else if(+timeRegister[1] > +timeExisted[j] && +timeRegister[1] <= +timeExisted[j+1]) {
-//                         boolean = true;
-//                     } 
-//                     else {
-//                         boolean = false;
-//                     }
-//                 }
-//             }
-//         } else {
-//             boolean = false;
-//         }
-//     })
-//     return boolean;
-// }
-
 let checkConflictCourseTime = (studentCourseTimeExisted, studentCourseDateExisted, courseTimeRegister, courseDateRegister) => {
     let boolean = false, count = 0;
 
@@ -110,13 +75,11 @@ let checkConflictCourseTime = (studentCourseTimeExisted, studentCourseDateExiste
                 }
             }
             if(count === 0) boolean = false;
-            console.log("count: ", count);
         } else {
             boolean = false;
         }
     return boolean;
 }
-
 
 let registerStudentToCourse = (courseId, studentId) => {
     return new Promise(async(resolve, reject) => {

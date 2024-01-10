@@ -1,4 +1,4 @@
-import { handleAdminLogin, createNewAdmin } from '../services/adminService';
+import { handleAdminLogin, createNewAdmin } from '../services/AdminService';
 // import { CookieParseOptions } from 'cookie-parser';
 // import bcrypt from 'bcrypt';
 
