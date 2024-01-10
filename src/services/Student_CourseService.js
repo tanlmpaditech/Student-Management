@@ -69,8 +69,10 @@ let checkConflictCourseTime = (studentCourseTimeExisted, studentCourseDateExiste
         for(let i = 0; i < studentCourseTimeExisted.length; i++) {
             let timeExisted = studentCourseTimeExisted[i].slice(0, -1).split('-');
             for(let j = 0; j < timeExisted.length; j+=2) {
-                if((+timeRegister[0] >= +timeExisted[j] && +timeRegister[0] < +timeExisted[j+1]) 
-                || (+timeRegister[1] > +timeExisted[j] && +timeRegister[1] <= +timeExisted[j+1])) {
+                if(+timeRegister[0] >= +timeExisted[j] && +timeRegister[0] < +timeExisted[j+1]) {
+                    count++
+                }
+                if (+timeRegister[1] > +timeExisted[j] && +timeRegister[1] <= +timeExisted[j+1]) {
                     count++
                 }
             }
