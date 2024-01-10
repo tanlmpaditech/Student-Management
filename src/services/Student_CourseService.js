@@ -57,27 +57,27 @@ let deleteStudentFromCourse = (courseId, studentId) => {
 }
 
 let checkConflictCourseTime = (studentCourseTimeExisted, studentCourseDateExisted, courseTimeRegister, courseDateRegister) => {
-    let boolean = false, count = 0;
-
+    let boolean = false;
     if(studentCourseDateExisted.includes(courseDateRegister)) {
-            boolean = true;
-        }
-        if(boolean === true) {
-            let timeRegister = courseTimeRegister.slice(0, -1).split('-');
-            for(let i = 0; i < studentCourseTimeExisted.length; i++) {
-                let timeExisted = studentCourseTimeExisted[i].slice(0, -1).split('-');
-                for(let j = 0; j < timeExisted.length; j+=2) {
-                    if(+timeRegister[0] >= +timeExisted[j] && +timeRegister[0] < +timeExisted[j+1]) {
-                        count++
-                    } else if(+timeRegister[1] > +timeExisted[j] && +timeRegister[1] <= +timeExisted[j+1]) {
-                        count++
-                    } 
+        boolean = true;
+    }
+    if(boolean === false) {
+        return boolean;
+    } else {
+        let count = 0;
+        let timeRegister = courseTimeRegister.slice(0, -1).split('-');
+        for(let i = 0; i < studentCourseTimeExisted.length; i++) {
+            let timeExisted = studentCourseTimeExisted[i].slice(0, -1).split('-');
+            for(let j = 0; j < timeExisted.length; j+=2) {
+                if((+timeRegister[0] >= +timeExisted[j] && +timeRegister[0] < +timeExisted[j+1]) 
+                || (+timeRegister[1] > +timeExisted[j] && +timeRegister[1] <= +timeExisted[j+1])) {
+                    count++
                 }
             }
-            if(count === 0) boolean = false;
-        } else {
-            boolean = false;
         }
+        if(count === 0) boolean = false;
+        // console.log("count: ", count);
+    }
     return boolean;
 }
 
@@ -116,7 +116,6 @@ let registerStudentToCourse = (courseId, studentId) => {
                     model: db.Student_Course,
                 }], 
             })
-
             studentCourseTimeExisted = studentCourseTimeExisted_.map((data) => data.dataValues.time);
             studentCourseDateExisted = studentCourseDateExisted_.map((data) => data.dataValues.date);
         }
@@ -126,32 +125,33 @@ let registerStudentToCourse = (courseId, studentId) => {
                     errCode: '1',
                     message: 'Student already exists in course'
                 });
-            } else if(!course || !existStudent) {
+            } 
+            if(!course || !existStudent) {
                 resolve({
                     errCode: '2',
                     message: 'Course ID or Student ID is not exist'
                 }); 
-            } else if(numberOfStudentInCourse && courseQuantity && numberOfStudentInCourse >= courseQuantity) {
+            } 
+            if(numberOfStudentInCourse && courseQuantity && numberOfStudentInCourse >= courseQuantity) {
                 resolve({
-                    errCode: '4',
+                    errCode: '3',
                     message: 'This course is full'
                 }); 
-            } else if(checkConflictCourseTime(studentCourseTimeExisted, studentCourseDateExisted, registerCourseTime, registerCourseDate) == true){
+            } 
+            if(checkConflictCourseTime(studentCourseTimeExisted, studentCourseDateExisted, registerCourseTime, registerCourseDate) == true){
                 resolve({
-                    errCode: '5',
+                    errCode: '4',
                     message: 'Students is conflicting course times'
                 }); 
             } 
-            else {
-                await db.Student_Course.create({ 
-                    courseId: courseId,
-                    studentId: studentId
-                })
-                resolve({
-                    errCode: '0',
-                    message: 'Add student successfully'
-                }); 
-            }
+            await db.Student_Course.create({ 
+                courseId: courseId,
+                studentId: studentId
+            })
+            resolve({
+                errCode: '0',
+                message: 'Add student successfully'
+            }); 
         } catch (err) { 
             reject(err);
         }
