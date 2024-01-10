@@ -24,7 +24,6 @@ module.exports = (sequelize, DataTypes) => {
     date: DataTypes.STRING,
     teacherId: DataTypes.STRING,
     quantity: DataTypes.INTEGER,
-    // numberOfStudent: DataTypes.INTEGER,
 
   }, {
     sequelize,

@@ -1,5 +1,5 @@
 
-import  { displayStudent, updateStudent, deleteStudent, createNewStudent } from '../services/studentService';
+import  { displayStudent, updateStudent, deleteStudent, createNewStudent } from '../services/StudentService';
 
 
 let getHomePage = async (req, res) => {

@@ -1,4 +1,4 @@
-import { displayStudentOnCourse, addNewStudentToCourse, deleteStudentFromCourse, registerStudentToCourse } from '../services/student-courseService'
+import { displayStudentOnCourse, addNewStudentToCourse, deleteStudentFromCourse, registerStudentToCourse } from '../services/Student_CourseService'
 
 let getAllStudentOnCourse = async (req, res) => {
     let data = await displayStudentOnCourse(req.params);
