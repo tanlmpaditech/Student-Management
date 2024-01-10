@@ -76,7 +76,6 @@ let checkConflictCourseTime = (studentCourseTimeExisted, studentCourseDateExiste
             }
         }
         if(count === 0) boolean = false;
-        // console.log("count: ", count);
     }
     return boolean;
 }
@@ -120,38 +119,73 @@ let registerStudentToCourse = (courseId, studentId) => {
             studentCourseDateExisted = studentCourseDateExisted_.map((data) => data.dataValues.date);
         }
         try {
-            if(student) {
-                resolve({
-                    errCode: '1',
-                    message: 'Student already exists in course'
-                });
-            } 
-            if(!course || !existStudent) {
-                resolve({
-                    errCode: '2',
-                    message: 'Course ID or Student ID is not exist'
-                }); 
-            } 
-            if(numberOfStudentInCourse && courseQuantity && numberOfStudentInCourse >= courseQuantity) {
-                resolve({
-                    errCode: '3',
-                    message: 'This course is full'
-                }); 
-            } 
-            if(checkConflictCourseTime(studentCourseTimeExisted, studentCourseDateExisted, registerCourseTime, registerCourseDate) == true){
-                resolve({
-                    errCode: '4',
-                    message: 'Students is conflicting course times'
-                }); 
-            } 
-            await db.Student_Course.create({ 
-                courseId: courseId,
-                studentId: studentId
-            })
-            resolve({
-                errCode: '0',
-                message: 'Add student successfully'
-            }); 
+            // if(student) {
+            //     resolve({
+            //         errCode: '1',
+            //         message: 'Student already exists in course'
+            //     });
+            // } else if(!course || !existStudent) {
+            //     resolve({
+            //         errCode: '2',
+            //         message: 'Course ID or Student ID is not exist'
+            //     }); 
+            // } else if(numberOfStudentInCourse && courseQuantity && numberOfStudentInCourse >= courseQuantity) {
+            //     resolve({
+            //         errCode: '3',
+            //         message: 'This course is full'
+            //     }); 
+            // } else if(checkConflictCourseTime(studentCourseTimeExisted, studentCourseDateExisted, registerCourseTime, registerCourseDate) == true){
+            //     resolve({
+            //         errCode: '4',
+            //         message: 'Students is conflicting course times'
+            //     }); 
+            // } else {
+            //     await db.Student_Course.create({ 
+            //         courseId: courseId,
+            //         studentId: studentId
+            //     })
+            //     resolve({
+            //         errCode: '0',
+            //         message: 'Add student successfully'
+            //     }); 
+            // }
+
+            switch (true) {
+                case (student != null): 
+                    resolve({
+                        errCode: '1',
+                        message: 'Student already existed in course'
+                    });
+                    break;
+                case (!course || !existStudent):
+                    resolve({
+                        errCode: '2',
+                        message: 'Course ID or Student ID is not existed'
+                    }); 
+                    break;
+                case (numberOfStudentInCourse && courseQuantity && +numberOfStudentInCourse >= +courseQuantity):
+                    resolve({
+                        errCode: '3',
+                        message: 'This course is full'
+                    }); 
+                    break;
+                case (checkConflictCourseTime(studentCourseTimeExisted, studentCourseDateExisted, registerCourseTime, registerCourseDate) == true):
+                    resolve({
+                        errCode: '4',
+                        message: 'Students is conflicting course times'
+                    }); 
+                    break;
+                default:
+                    await db.Student_Course.create({ 
+                        courseId: courseId,
+                        studentId: studentId
+                    })
+                    resolve({
+                        errCode: '0',
+                        message: 'Add student successfully'
+                    });
+                    break;
+            }
         } catch (err) { 
             reject(err);
         }
