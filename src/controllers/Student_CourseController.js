@@ -1,25 +1,22 @@
 import { displayStudentOnCourse, addNewStudentToCourse, deleteStudentFromCourse, registerStudentToCourse } from '../services/Student_CourseService'
 
-let getAllStudentOnCourse = async (req, res) => {
-    let data = await displayStudentOnCourse(req.params);
-    // console.log(req.params);
-    // console.log(data);
-    // let message = await updateStudent(data);
+const getAllStudentOnCourse = async (req, res) => {
+    const data = await displayStudentOnCourse(req.params);
     return res.send(data);
 }
 
-let handleAddStudentToCourse = async (req, res) => {
-    let data = req.body;
-    let courseId = req.params.courseId;
-    let studentId = data.studentId;
-    let message = await addNewStudentToCourse(courseId, studentId);
+const handleAddStudentToCourse = async (req, res) => {
+    const data = req.body;
+    const courseId = req.params.courseId;
+    const studentId = data.studentId;
+    const message = await addNewStudentToCourse(courseId, studentId);
     return res.status(200).json(message);
 }
 
-let handleDeleteStudentFromCourse = async (req, res) => {
+const handleDeleteStudentFromCourse = async (req, res) => {
     // console.log(req)
-    let courseId = req.params.courseId;
-    let studentId = req.body.studentId;
+    const courseId = req.params.courseId;
+    const studentId = req.body.studentId;
     if(!courseId || !studentId) {
         return res.status(200).json({
             errCode: 2,
@@ -27,14 +24,14 @@ let handleDeleteStudentFromCourse = async (req, res) => {
         })
     }
 
-    let message = await deleteStudentFromCourse(courseId, studentId);
+    const message = await deleteStudentFromCourse(courseId, studentId);
     return res.status(200).json(message);
 }
 
-let handleRegisterStudentToCourse = async (req, res) => {
-    let courseId = req.body.courseId;
-    let studentId = req.body.studentId;
-    let message = await registerStudentToCourse(courseId, studentId);
+const handleRegisterStudentToCourse = async (req, res) => {
+    const courseId = req.body.courseId;
+    const studentId = req.body.studentId;
+    const message = await registerStudentToCourse(courseId, studentId);
     return res.status(200).json(message);
 }
 export { getAllStudentOnCourse, handleAddStudentToCourse, handleDeleteStudentFromCourse, handleRegisterStudentToCourse } ;

@@ -2,10 +2,10 @@ import { handleAdminLogin, createNewAdmin } from '../services/AdminService';
 // import { CookieParseOptions } from 'cookie-parser';
 // import bcrypt from 'bcrypt';
 
-let handleLogin = async (req, res) => {
-    let email = req.body.email;
-    let password = req.body.password;
-    let adminData = await handleAdminLogin(email, password);
+const handleLogin = async (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+    const adminData = await handleAdminLogin(email, password);
 
     // res.cookie('jwt', adminData.token, { httpOnly: true, maxAge: 60*60*1000 })
     if(!email || !password) {
@@ -18,9 +18,9 @@ let handleLogin = async (req, res) => {
     return res.status(200).json({ adminData })
 }
 
-let handleCreateAdmin = async (req, res) => {
-    let data = req.body;
-    let message = await createNewAdmin(data);
+const handleCreateAdmin = async (req, res) => {
+    const data = req.body;
+    const message = await createNewAdmin(data);
     return res.status(200).json(message);
 }
 

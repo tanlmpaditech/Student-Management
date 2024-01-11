@@ -1,25 +1,25 @@
 import { displayCourse, createNewCourse, deleteCourse, updateCourse } from '../services/courseService'
 
-let getAllCourses = async (req, res) => {
-    let data = await displayCourse();
-    // let message = await updateStudent(data);
+const getAllCourses = async (req, res) => {
+    const data = await displayCourse();
+    // const message = await updateStudent(data);
     return res.send(data);
 }
 
-let handleCreateCourse = async (req, res) => {
-    let data = req.body;
-    let message = await createNewCourse(data);
+const handleCreateCourse = async (req, res) => {
+    const data = req.body;
+    const message = await createNewCourse(data);
     console.log(data);
     return res.status(200).json(message);
 }
 
-let handleEditCourse = async (req, res) => {
-    let data = req.body;
-    let message = await updateCourse(data);
+const handleEditCourse = async (req, res) => {
+    const data = req.body;
+    const message = await updateCourse(data);
     return res.status(200).json(message);
 }
 
-let handleDeleteCourse = async (req, res) => {
+const handleDeleteCourse = async (req, res) => {
     if(!req.body.id) {
         return res.status(200).json({
             errCode: 2,
@@ -27,7 +27,7 @@ let handleDeleteCourse = async (req, res) => {
         })
     }
 
-    let message = await deleteCourse(req.body.id);
+    const message = await deleteCourse(req.body.id);
     return res.status(200).json(message);
 }
 export { getAllCourses, handleCreateCourse, handleDeleteCourse, handleEditCourse } ;
