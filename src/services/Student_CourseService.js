@@ -1,19 +1,16 @@
 import db from '../models/index'
 
 const displayStudentOnCourse = async (courseId) => {
-    try {
-        const students = await db.Student.findAll({
-            include: [{
-                model: db.Student_Course,
-                where: {
-                    courseId: courseId.courseId,
-                }
-            }]
-        }, );
-        return students;
-    } catch (error) {
-        throw new Error(error);
-    }
+    const students = await db.Student.findAll({
+        include: [{
+            model: db.Student_Course,
+            where: {
+                courseId: courseId.courseId,
+            }
+        }]
+    }, );
+    return students;
+   
 }
 
 const addNewStudentToCourse = async (courseId, studentId) => {
@@ -29,25 +26,21 @@ const addNewStudentToCourse = async (courseId, studentId) => {
 }
 
 const deleteStudentFromCourse = async (courseId, studentId) => {
-    try {
-        const student = await db.Student_Course.findOne({
-            where: { studentId: studentId, courseId: courseId }
-        })
-        if (student) {
-            await student.destroy();
-            return ({
-                errCode: 0,
-                message: 'Remove student successfully'
-            });
-        }
+    const student = await db.Student_Course.findOne({
+        where: { studentId: studentId, courseId: courseId }
+    })
+    if (student) {
+        await student.destroy();
         return ({
-            errCode: 1,
-            message: 'Student not found'
-        })
-        
-    } catch (error) {
-        throw new Error(error)
+            errCode: 0,
+            message: 'Remove student successfully'
+        });
     }
+    return ({
+        errCode: 1,
+        message: 'Student not found'
+    })
+        
 }
 
 const checkConflictCourseTime = (studentCourseTimeExisted, studentCourseDateExisted, courseTimeRegister, courseDateRegister) => {
