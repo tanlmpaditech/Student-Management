@@ -44,12 +44,12 @@ let deleteStudentFromCourse = (courseId, studentId) => {
                     errCode: 0,
                     message: 'Remove student successfully'
                 });
-            } else {
-                resolve({
-                    errCode: 1,
-                    message: 'Student not found'
-                })
             }
+            resolve({
+                errCode: 1,
+                message: 'Student not found'
+            })
+            
         } catch (error) {
             reject(error)
         }
@@ -61,9 +61,7 @@ let checkConflictCourseTime = (studentCourseTimeExisted, studentCourseDateExiste
     if(studentCourseDateExisted.includes(courseDateRegister)) {
         boolean = true;
     }
-    if(boolean === false) {
-        return boolean;
-    } else {
+    if(boolean === true) {
         let count = 0;
         let timeRegister = courseTimeRegister.slice(0, -1).split('-');
         for(let i = 0; i < studentCourseTimeExisted.length; i++) {
@@ -121,37 +119,6 @@ let registerStudentToCourse = (courseId, studentId) => {
             studentCourseDateExisted = studentCourseDateExisted_.map((data) => data.dataValues.date);
         }
         try {
-            // if(student) {
-            //     resolve({
-            //         errCode: '1',
-            //         message: 'Student already exists in course'
-            //     });
-            // } else if(!course || !existStudent) {
-            //     resolve({
-            //         errCode: '2',
-            //         message: 'Course ID or Student ID is not exist'
-            //     }); 
-            // } else if(numberOfStudentInCourse && courseQuantity && numberOfStudentInCourse >= courseQuantity) {
-            //     resolve({
-            //         errCode: '3',
-            //         message: 'This course is full'
-            //     }); 
-            // } else if(checkConflictCourseTime(studentCourseTimeExisted, studentCourseDateExisted, registerCourseTime, registerCourseDate) == true){
-            //     resolve({
-            //         errCode: '4',
-            //         message: 'Students is conflicting course times'
-            //     }); 
-            // } else {
-            //     await db.Student_Course.create({ 
-            //         courseId: courseId,
-            //         studentId: studentId
-            //     })
-            //     resolve({
-            //         errCode: '0',
-            //         message: 'Add student successfully'
-            //     }); 
-            // }
-
             switch (true) {
                 case (student != null): 
                     resolve({
