@@ -1,9 +1,9 @@
 import db from '../models/index'
 
-let displayCourse = () => {
+const displayCourse = () => {
     return new Promise(async (resolve, reject) => {
         try {
-            let courses = await db.Course.findAll({raw: true});
+            const courses = await db.Course.findAll({raw: true});
             resolve(courses); 
         } catch (error) {
             reject(error);
@@ -11,7 +11,7 @@ let displayCourse = () => {
     });
 }
 
-let createNewCourse = async (data) => {
+const createNewCourse = async (data) => {
     return new Promise(async(resolve, reject) => {
         try {
             await db.Course.create({
@@ -30,10 +30,10 @@ let createNewCourse = async (data) => {
     });
 }
 
-let deleteCourse = (courseId) => {
+const deleteCourse = (courseId) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let course = await db.Course.findOne({
+            const course = await db.Course.findOne({
                 where: { id: courseId }
             })
             if (course) {
@@ -54,7 +54,7 @@ let deleteCourse = (courseId) => {
     })
 }
 
-let updateCourse = (data) => {
+const updateCourse = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
             if(!data.id) {
@@ -63,7 +63,7 @@ let updateCourse = (data) => {
                     message: 'Missing id parameter',
                 })
             }
-            let course = await db.Course.findOne({ 
+            const course = await db.Course.findOne({ 
                 where: { id: data.id }
             });
             if(course) {
@@ -73,12 +73,12 @@ let updateCourse = (data) => {
                     errCode: '0',
                     message: 'Course updated successfully'
                 })
-            } else {
-                resolve({
-                    errCode: '1',
-                    message: 'Course not found'
-                });
             }
+            resolve({
+                errCode: '1',
+                message: 'Course not found'
+            });
+            
         } catch (error) {
             reject(error);
         }

@@ -5,9 +5,9 @@ import { handleLogin, handleCreateAdmin } from '../controllers/AdminController';
 import { getAllStudentOnCourse, handleAddStudentToCourse, handleDeleteStudentFromCourse, handleRegisterStudentToCourse } from '../controllers/Student_CourseController'
 // import { checkJWT } from '../middleware/JWTAction';
 
-let router = express.Router({mergeParams:true});
+const router = express.Router({mergeParams:true});
 
-let initWebRouter = (app) => {
+const initWebRouter = (app) => {
     router.get('/', getHomePage);
     
     router.get('/students', getAllStudents);

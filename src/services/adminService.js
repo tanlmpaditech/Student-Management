@@ -5,10 +5,10 @@ import { createJwt } from '../middleware/JWTAction';
 
 const salt = bcrypt.genSaltSync(10);
 
-let createNewAdmin = async () => {
+const createNewAdmin = async () => {
     return new Promise(async (resolve, reject) => {
         try {
-            let hassPasswordByBcrypt = await hashAdminPassword(data.password);
+            const hassPasswordByBcrypt = await hashAdminPassword(data.password);
             await db.Admin.create({
                 fullName: data.fullName,
                 email: data.email,
@@ -28,7 +28,7 @@ let createNewAdmin = async () => {
 const hashAdminPassword = (password) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let hassPassword = bcrypt.hashSync(password, salt);
+            const hassPassword = bcrypt.hashSync(password, salt);
             resolve(hassPassword);
         } catch (error) {
             reject(error);
@@ -36,25 +36,25 @@ const hashAdminPassword = (password) => {
     })
 }
 
-let handleAdminLogin = (email, password) => {
+const handleAdminLogin = (email, password) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let adminData = {};
-            let isExist = await checkAdminEmail(email)
+            const adminData = {};
+            const isExist = await checkAdminEmail(email)
             if(isExist) {
                 // resolve()
-                let admin = await db.Admin.findOne({
+                const admin = await db.Admin.findOne({
                     attributes: ['email', 'password'],
                     where: {email: email},
                     raw: true
                 })
                 if(admin) {
-                    // let check = bcrypt.compareSync(password, admin.password);
-                    let check = admin.password === password;
+                    // const check = bcrypt.compareSync(password, admin.password);
+                    const check = admin.password === password;
                     if(check) {
                         adminData.errCode = 0;
                         adminData.errMessage = 'Login successful';
-                        let payload = {
+                        const payload = {
                             email: admin.email,
                             expiresIn: process.env.JWT_EXPIRES_IN
                         }
@@ -82,10 +82,10 @@ let handleAdminLogin = (email, password) => {
     // return true;
 }
 
-let checkAdminEmail = (adminEmail) => {
+const checkAdminEmail = (adminEmail) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let admin = await db.Admin.findOne({
+            const admin = await db.Admin.findOne({
                 where: { email: adminEmail }
             })
             if(admin) {

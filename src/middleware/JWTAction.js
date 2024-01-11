@@ -3,8 +3,8 @@ import Jwt from "jsonwebtoken";
 require("dotenv").config();
 
 const createJwt = (payload) => {
-    let key = process.env.JWT_SECRET
-    let token = null;
+    const key = process.env.JWT_SECRET
+    const token = null;
     try {
         token = Jwt.sign(payload, key);
     } catch (error) {
@@ -14,8 +14,8 @@ const createJwt = (payload) => {
 }
 
 const verifyToken = (token) => {
-    let key = process.env.JWT_SECRET;
-    let decoded = null;
+    const key = process.env.JWT_SECRET;
+    const decoded = null;
     try {
         decoded = Jwt.verify(token, key);
     } catch (error) {
@@ -24,32 +24,32 @@ const verifyToken = (token) => {
     return decoded;
 }
 
-let checkJWT = async (req, res, next) => {
+const checkJWT = async (req, res, next) => {
     // const nonSecurePaths = ['/', '/login'];
     // if(nonSecurePaths.includes(req.path)) return next();
     // next();
 
-    let cookies = req.cookies;
+    const cookies = req.cookies;
     if(cookies && cookies.jwt) {
-        let token = cookies.jwt;
-        let decoded = verifyToken(token);
+        const token = cookies.jwt;
+        const decoded = verifyToken(token);
         if(decoded) {
             req.admin = decoded;
             // console.log(data);
             next();
-        } else {
-            return req.status(401).json({
-                errCode: 1,
-                errMessage: "Admin is not logged in"
-            })
-        }
-        // console.log(cookies.jwt);
-    } else {
+        } 
         return req.status(401).json({
             errCode: 1,
             errMessage: "Admin is not logged in"
         })
+        
+        // console.log(cookies.jwt);
     }
+    return req.status(401).json({
+        errCode: 1,
+        errMessage: "Admin is not logged in"
+    })
+
     // console.log(cookies);
 }
 

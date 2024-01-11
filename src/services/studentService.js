@@ -1,10 +1,10 @@
 
 import db from '../models/index'
 
-let displayStudent = () => {
+const displayStudent = () => {
     return new Promise(async (resolve, reject) => {
         try {
-            let students = await db.Student.findAll({raw: true});
+            const students = await db.Student.findAll({raw: true});
             resolve(students); 
         } catch (error) {
             reject(error);
@@ -12,25 +12,25 @@ let displayStudent = () => {
     });
 }
 
-let getStudentById = (studentId) => {
+const getStudentById = (studentId) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let student = await db.Student.findOne({
+            const student = await db.Student.findOne({
                 where: { id: studentId },
                 raw: true
             })
             if(student) {
                 resolve(student);
-            } else {
-                resolve([]);
-            }   
+            }
+            resolve([]);
+              
         } catch (error) {
             reject(error);
         }
     })
 }
 
-let updateStudent = (data) => {
+const updateStudent = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
             if(!data.id) {
@@ -39,7 +39,7 @@ let updateStudent = (data) => {
                     message: 'Missing id parameter',
                 })
             }
-            let student = await db.Student.findOne({ 
+            const student = await db.Student.findOne({ 
                 where: { id: data.id }
             });
             if(student) {
@@ -49,19 +49,19 @@ let updateStudent = (data) => {
                     errCode: '0',
                     message: 'Student updated successfully'
                 })
-            } else {
-                resolve({
-                    errCode: '1',
-                    message: 'Student not found'
-                });
             }
+            resolve({
+                errCode: '1',
+                message: 'Student not found'
+            });
+            
         } catch (error) {
             reject(error);
         }
     })
 }
 
-let createNewStudent = async (data) => {
+const createNewStudent = async (data) => {
     return new Promise(async(resolve, reject) => {
         try {
             await db.Student.create({
@@ -82,10 +82,10 @@ let createNewStudent = async (data) => {
     });
 }
 
-let deleteStudent = (studentId) => {
+const deleteStudent = (studentId) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let student = await db.Student.findOne({
+            const student = await db.Student.findOne({
                 where: { id: studentId }
             })
             if (student) {
@@ -94,12 +94,12 @@ let deleteStudent = (studentId) => {
                     errCode: 0,
                     message: 'Student deleted successfully'
                 });
-            } else {
-                resolve({
-                    errCode: 1,
-                    message: 'Student not found'
-                })
             }
+            resolve({
+                errCode: 1,
+                message: 'Student not found'
+            })
+            
         } catch (error) {
             reject(error)
         }

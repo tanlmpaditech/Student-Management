@@ -11,7 +11,7 @@ import cookieParser from 'cookie-parser';
 
 dotenv.config();
 
-let app = express();
+const app = express();
 
 const cors = require('cors')
 const corsOption = {
@@ -29,7 +29,7 @@ initWebRouter(app);
 
 connectDB();
 
-let port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
     console.log("Backend listening on port " + port)
