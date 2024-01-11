@@ -42,12 +42,12 @@ const deleteCourse = (courseId) => {
                     errCode: 0,
                     message: 'Course deleted successfully'
                 });
-            } else {
-                resolve({
-                    errCode: 1,
-                    message: 'Course not found'
-                })
             }
+            resolve({
+                errCode: 1,
+                message: 'Course not found'
+            })
+            
         } catch (error) {
             reject(error)
         }

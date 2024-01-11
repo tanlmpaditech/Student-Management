@@ -63,15 +63,15 @@ const handleAdminLogin = (email, password) => {
                         
                         delete admin.password;
                     
-                    } else {
-                        adminData.errCode = 3;
-                        adminData.errMessage = 'Password incorrect';
-                    }
+                    } 
+                    adminData.errCode = 3;
+                    adminData.errMessage = 'Password incorrect';
+                    
                 }
-            } else {
-                adminData.errCode = 2;
-                adminData.errMessage = 'Username or password incorrect';
             }
+            adminData.errCode = 2;
+            adminData.errMessage = 'Username or password incorrect';
+            
 
             resolve(adminData);
         } catch (error) {
@@ -90,9 +90,9 @@ const checkAdminEmail = (adminEmail) => {
             })
             if(admin) {
                 resolve(true);
-            } else {
-                resolve(false);
-            }
+            } 
+            resolve(false);
+            
         } catch (error) {
             reject(error);
         }

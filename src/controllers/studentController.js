@@ -2,30 +2,30 @@
 import  { displayStudent, updateStudent, deleteStudent, createNewStudent } from '../services/StudentService';
 
 
-let getHomePage = async (req, res) => {
+const getHomePage = async (req, res) => {
     console.log('Cookies: ', req.cookies)
     return res.render("homepage.ejs");
 }
 
-let handleCreateStudent = async (req, res) => {
-    let data = req.body;
-    let message = await createNewStudent(data);
+const handleCreateStudent = async (req, res) => {
+    const data = req.body;
+    const message = await createNewStudent(data);
     return res.status(200).json(message);
 }
 
-let getAllStudents = async (req, res) => {
-    let data = await displayStudent();
-    // let message = await updateStudent(data);
+const getAllStudents = async (req, res) => {
+    const data = await displayStudent();
+    // const message = await updateStudent(data);
     return res.send(data);
 }   
 
-let handleEditStudent = async (req, res) => {
-    let data = req.body;
-    let message = await updateStudent(data);
+const handleEditStudent = async (req, res) => {
+    const data = req.body;
+    const message = await updateStudent(data);
     return res.status(200).json(message);
 }
 
-let handleDeleteStudent = async (req, res) => {
+const handleDeleteStudent = async (req, res) => {
     if(!req.body.id) {
         return res.status(200).json({
             errCode: 2,
@@ -33,7 +33,7 @@ let handleDeleteStudent = async (req, res) => {
         })
     }
 
-    let message = await deleteStudent(req.body.id);
+    const message = await deleteStudent(req.body.id);
     return res.status(200).json(message);
 }
 
